@@ -1,0 +1,45 @@
+package tictactoe.model;
+
+public class GameModel {
+    private String[] board = new String[9];
+
+    public GameModel() {
+        for (int i = 0; i < 9; i++) {
+            board[i] = "";
+        }
+    }
+
+    public void setCell(int index, String player) {
+        board[index] = player;
+    }
+
+    public boolean isBoardFull() {
+        for (String cell : board) {
+            if (cell.equals("")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public String checkWinner() {
+        String[][] lines = {
+            {board[0], board[1], board[2]},
+            {board[3], board[4], board[5]},
+            {board[6], board[7], board[8]},
+            {board[0], board[3], board[6]},
+            {board[1], board[4], board[7]},
+            {board[2], board[5], board[8]},
+            {board[0], board[4], board[8]},
+            {board[2], board[4], board[6]}
+        };
+
+        for (String[] line : lines) {
+            if (!line[0].equals("") && line[0].equals(line[1]) && line[1].equals(line[2])) {
+                return line[0];
+            }
+        }
+
+        return "";
+    }
+}
